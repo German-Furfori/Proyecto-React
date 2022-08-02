@@ -1,22 +1,22 @@
 import * as React from 'react';
 import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
+import { Container } from '@mui/material';
 import Card from './Card';
 
 export default function RowAndColumnSpacing(props) {
   return (
-    <Box sx={{ width: '100%' }}>
-      <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-        <Grid item xs={6}>
-          { props.characters.map((character, index) => 
-            (<Card
-              name = {character.name}
-              image = {character.image}
-              key = {index}/>
-            ))
+    <Container fixed sx={{ padding: 12 }}>
+      <Grid container spacing={{ xs: 1, md: 2 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+          { props.characters.map((character, index) =>
+            <Grid item xs={12} sm={4} md={3}>
+              <Card
+                name = {character.name}
+                image = {character.image}
+                key = {index}/>
+             </Grid>
+            )
           }
-        </Grid>
       </Grid>
-    </Box>
+    </Container>
   );
 }
