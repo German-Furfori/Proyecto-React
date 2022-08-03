@@ -12,6 +12,9 @@ export default function RowAndColumnSpacing(props) {
               <Card
                 name = {character.name}
                 image = {character.image}
+                id = {character.id}
+                species = {character.species}
+                status = {character.status}
                 key = {index}/>
              </Grid>
             )
