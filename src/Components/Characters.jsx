@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react'
-import axios from 'axios'
 import Grid from './Grid';
 import { useSelector, useDispatch } from 'react-redux';
 import { getCharacters } from '../store/slices/characters/thunks';
@@ -18,6 +17,13 @@ const Characters = () => {
   return (
     <div className='App'>
       <Grid characters = {characters}/>
+
+      <Button
+        onClick={() => dispatch (getCharacters(page - 2))}
+        variant="contained"
+      >
+        Previous page
+      </Button>
 
       <Button
         onClick={() => dispatch (getCharacters(page))}

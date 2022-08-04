@@ -3,11 +3,11 @@
 import { rickAndMortyApi } from "../../../api/rickAndMortyApi";
 import { setCharacters, startLoadingCharacters } from "./charactersSlice"
 
-export const getCharacters = ( page = 0 ) => {
+export const getCharacters = ( page = 1 ) => {
     return async (dispatch, getState) => { // Una función que regresa otra función. Se manda a llamar con los argumentos dispatch y setState
         dispatch( startLoadingCharacters() );
 
-        const {data} = await rickAndMortyApi.get(`character/?page=${page * 20}`);
+        const {data} = await rickAndMortyApi.get(`character/?page=${page}`);
         console.log(data);
 
         dispatch( setCharacters({ characters: data.results, page: page + 1 }) );
