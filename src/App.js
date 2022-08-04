@@ -11,7 +11,18 @@ import { RickAndMortyApp } from './components/RickAndMortyApp';
 
 function App() {
   return (
-    <Provider store={store}>
+    <>
+      <Provider store={store} >
+        <RickAndMortyApp />
+      </Provider>
+    </>
+  );
+}
+
+export default App;
+
+/* 
+<Provider store={store}>
       <BrowserRouter>
         <ResponsiveAppBar/>
         <Routes>
@@ -22,11 +33,4 @@ function App() {
         </Routes>
       </BrowserRouter>
     </Provider>
-  );
-}
-
-export default App;
-
-/* 
-
 */

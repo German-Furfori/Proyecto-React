@@ -3,7 +3,7 @@ import React from 'react'
 const About = () => {
   return (
     <>
-      <h1>Germán Marcelo Furfori, estudiante de Programación</h1>
+      <h1 className='App'>Germán Marcelo Furfori, estudiante de Programación</h1>
     </>
   )
 }

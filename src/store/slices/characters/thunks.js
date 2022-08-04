@@ -1,15 +1,15 @@
 // Este archivo va a tener todos los thunks que estén relacionados a mis personajes (peticiones http para posteos, traer info, etc)
 
+import { rickAndMortyApi } from "../../../api/rickAndMortyApi";
 import { setCharacters, startLoadingCharacters } from "./charactersSlice"
 
 export const getCharacters = ( page = 0 ) => {
     return async (dispatch, getState) => { // Una función que regresa otra función. Se manda a llamar con los argumentos dispatch y setState
         dispatch( startLoadingCharacters() );
 
-        // To do: realizar petición HTTP
-        
-        
+        const {data} = await rickAndMortyApi.get(`character/?page=${page * 20}`);
+        console.log(data);
 
-        //dispatch( setCharacters() )
+        dispatch( setCharacters({ characters: data.results, page: page + 1 }) );
     }
 }
