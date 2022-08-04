@@ -1,8 +1,11 @@
 import React from 'react'
+import Portada from './images/portada.jpg'
 
 const Home = () => {
   return (
-    <div>Home</div>
+    <>
+      <img src={Portada} alt="" />
+    </>
   )
 }
 
