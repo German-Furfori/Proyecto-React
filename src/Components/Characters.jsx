@@ -1,24 +1,37 @@
 import React, {useEffect, useState} from 'react'
 import axios from 'axios'
 import Grid from './Grid';
+import { useSelector, useDispatch } from 'react-redux';
+import { getCharacters } from '../store/slices/characters/thunks';
+import Button from '@mui/material/Button'; 
 
 const baseUrl = "https://rickandmortyapi.com/api/character"
 
 const Characters = () => {
-  const [characters, setCharacters] = useState([])
+  const dispatch = useDispatch();
+  const {characters = [], page} = useSelector( state => state.characters );
 
   useEffect(() => {
-    axios
-      .get(baseUrl)
-      .then((response) => {
-        console.log(response)
-        setCharacters(response.data.results);
-      })
+    dispatch( getCharacters() ); // Estoy disparando el thunk
   }, [])
 
   return (
-    <div><Grid characters = {characters}/></div>
+    <div className='App'>
+      <Grid characters = {characters}/>
+
+      <Button
+        onClick={() => dispatch (getCharacters(page))}
+        variant="contained"
+      >
+        Next page
+      </Button>
+    </div>
   )
 }
 
 export default Characters
+
+/* <button
+        onClick= {() => dispatch (getCharacters(page))}>
+          Next
+      </button> */

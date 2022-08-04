@@ -13,7 +13,15 @@ function App() {
   return (
     <>
       <Provider store={store} >
-        <RickAndMortyApp />
+        <BrowserRouter>
+        <ResponsiveAppBar/>
+        <Routes>
+          <Route path="/" element={<Home/>} />
+          <Route path="/characters" element={<Characters/>} />
+          <Route path="/about" element={<About/>} />
+          <Route path="/character/:id" element={<CardInfo/>} />
+        </Routes>
+      </BrowserRouter>
       </Provider>
     </>
   );
@@ -33,4 +41,6 @@ export default App;
         </Routes>
       </BrowserRouter>
     </Provider>
+
+    <RickAndMortyApp />
 */
