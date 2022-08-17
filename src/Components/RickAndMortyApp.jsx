@@ -1,31 +1,53 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getCharacters } from "../store/slices/characters/thunks";
+import React, {useEffect } from 'react'
+import Grid from './Grid';
+import { useSelector, useDispatch } from 'react-redux';
+import { getCharacters } from '../store/slices/characters/thunks';
+import { Pagination, Container } from '@mui/material';
 
-export const RickAndMortyApp = () => {
-    const dispatch = useDispatch(); // Dispara o despacha cualquier accion, sea cual sea la pieza del store
-    const {isLoading, characters = [], page} = useSelector( state => state.characters );
+const RickAndMortyApp = () => {
+  const dispatch = useDispatch();
+  const {characters = [], page} = useSelector( state => state.characters );
 
-    useEffect(() => {
-      dispatch( getCharacters() ); // Estoy disparando el thunk
-    }, [])
+  const handleChangePage = (event, value) => {
+    event.preventDefault();
+    dispatch(getCharacters(value));
+  }
 
-    return (
-        <>
-            <h1>Rick and Morty App</h1>
+  useEffect(() => {
+    dispatch( getCharacters() ); // Estoy disparando el thunk
+  }, [dispatch])
 
-            <ul>
-                {
-                    characters.map( character => (
-                        <li key={character.name}>{character.name}</li>
-                    ) )
-                }
-            </ul>
-            
-            <button
-                onClick= {() => dispatch (getCharacters(page))}>
-                Next
-            </button>
-        </>
-    )
+  return (
+    <div className='App'>
+      <Container fixed 
+        sx={{ 
+          paddingBottom: 7,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+         }}>
+          <Pagination
+            sx={{
+              marginTop: '2rem',
+            }}
+            count={42}
+            defaultPage={page}
+            onChange={handleChangePage}
+            color="primary" />
+
+          <Grid characters = {characters}/>
+
+          <Pagination
+            sx={{
+              marginTop: '2rem',
+            }}
+            count={42}
+            defaultPage={page}
+            onChange={handleChangePage}
+            color="primary" />
+      </Container>
+    </div>
+  )
 }
+
+export default RickAndMortyApp

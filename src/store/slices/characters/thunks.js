@@ -8,7 +8,8 @@ export const getCharacters = ( page = 1 ) => {
         dispatch( startLoadingCharacters() );
 
         const {data} = await rickAndMortyApi.get(`character/?page=${page}`);
-        console.log(data);
+        //console.log(data);
+        console.log("Hola");
 
         dispatch( setCharacters({ characters: data.results, page: page + 1 }) );
     }

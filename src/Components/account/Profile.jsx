@@ -1,7 +1,7 @@
 import React from 'react'
 import { Typography } from '@mui/material'
 
-const About = () => {
+const Profile = () => {
   return (
     <>
       <h1 className='App'>
@@ -13,4 +13,4 @@ const About = () => {
   )
 }
 
-export default About
+export default Profile

@@ -10,12 +10,12 @@ export default function RowAndColumnSpacing(props) {
           { props.characters.map((character, index) =>
             <Grid item xs={12} sm={4} md={3}>
               <Card
+                key = {character.id}
                 name = {character.name}
                 image = {character.image}
-                id = {character.id}
                 species = {character.species}
-                status = {character.status}
-                key = {index}/>
+                gender = {character.gender}
+                status = {character.status}/>
              </Grid>
             )
           }

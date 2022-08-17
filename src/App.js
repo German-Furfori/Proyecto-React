@@ -1,27 +1,26 @@
 import './App.css';
-import Characters from './components/Characters';
-import ResponsiveAppBar from './components/ResponsiveAppBar';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import ResponsiveAppBar from './components/ResponsiveAppBar';
 import Home from './components/Home';
-import About from './components/About';
+import RickAndMortyApp from './components/RickAndMortyApp';
+import Profile from './components/account/Profile';
 import CardInfo from './components/CardInfo';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
-import { RickAndMortyApp } from './components/RickAndMortyApp';
 
 function App() {
-  return (
+  return ( // https://youtu.be/ZXiJdEWVcqY VIDEO DE RUTAS PRIVADAS
     <>
-      <Provider store={store} >
+      <Provider store={store}>
         <BrowserRouter>
-        <ResponsiveAppBar/>
-        <Routes>
-          <Route path="/" element={<Home/>} />
-          <Route path="/characters" element={<Characters/>} />
-          <Route path="/about" element={<About/>} />
-          <Route path="/character/:id" element={<CardInfo/>} />
-        </Routes>
-      </BrowserRouter>
+          <ResponsiveAppBar/>
+          <Routes>
+            <Route path="/" element={<Home/>} />
+            <Route path="/characters" element={<RickAndMortyApp />} />
+            <Route path="/profile" element={<Profile/>} />
+            <Route path="/character/:id" element={<CardInfo/>} />
+          </Routes>
+        </BrowserRouter>
       </Provider>
     </>
   );
@@ -30,17 +29,25 @@ function App() {
 export default App;
 
 /* 
-<Provider store={store}>
-      <BrowserRouter>
-        <ResponsiveAppBar/>
-        <Routes>
-          <Route path="/" element={<Home/>} />
-          <Route path="/characters" element={<Characters/>} />
-          <Route path="/about" element={<About/>} />
-          <Route path="/character/:id" element={<CardInfo/>} />
-        </Routes>
-      </BrowserRouter>
-    </Provider>
 
-    <RickAndMortyApp />
+<Provider store={store} >
+        <AuthContextProvider>
+          <BrowserRouter>
+            <ResponsiveAppBar/>
+            <Routes>
+              <Route path="/" element={<PublicRoute />}>
+                <Route path="/home" element={<Home/>} />
+                <Route path="/login" element={<Login/>} />
+              </Route>
+              <Route path="/app" element={<PrivateRoute/>}>
+                <Route path="/characters" element={<RickAndMortyApp/>} />
+                <Route path="/profile" element={<Profile/>} />
+                <Route path="/logout" element={<Logout/>} />
+                <Route path="/character/:id" element={<CardInfo/>} />
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </AuthContextProvider>
+      </Provider>
+
 */
