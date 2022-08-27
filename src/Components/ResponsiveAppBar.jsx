@@ -13,27 +13,28 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import { Link } from 'react-router-dom';
 
-const pages = ['Home', 'Characters', 'About'];
-const settings = ['Logout'];
+// const pages = ['Home', 'Characters', 'About'];
+// const settings = ['Logout'];
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  // const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
+
+  // const handleOpenUserMenu = (event) => {
+  //   setAnchorElUser(event.currentTarget);
+  // };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
+  // const handleCloseUserMenu = () => {
+  //   setAnchorElUser(null);
+  // };
 
   return (
     <AppBar position="static">
@@ -68,11 +69,21 @@ const ResponsiveAppBar = () => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
+              <MenuItem key={'Home'} onClick={handleCloseNavMenu}>
+                <Link to={"/"}>
+                  <Typography textAlign="center">Home</Typography>
+                </Link>
+              </MenuItem>
+              <MenuItem key={'Home'} onClick={handleCloseNavMenu}>
+                <Link to={"/characters"}>
+                  <Typography textAlign="center">Characters</Typography>
+                </Link>
+              </MenuItem>
+              <MenuItem key={'About'} onClick={handleCloseNavMenu}>
+                <Link to={"/"}>
+                  <Typography textAlign="center">About</Typography>
+                </Link>
+              </MenuItem>
             </Menu>
           </Box>
 

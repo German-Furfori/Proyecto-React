@@ -1,0 +1,11 @@
+Primero: instalamos esto con este comando:
+
+npm install workbox-core workbox-expiration workbox-precaching workbox-routing workbox-strategies 
+Nos da las estrategias de caché
+
+copié y pegue los archivos del grupo de wpp (serviceWorkerRegistration, service-worker, y copie en el index.js también lo que pasaron por ahí)
+Además, en el if del serviceWorkerRegistration lo dejé así: if ('serviceWorker' in navigator) {
+
+Después, para que ande hice:
+npm install -g serve
+serve -s build
