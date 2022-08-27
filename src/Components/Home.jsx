@@ -1,5 +1,5 @@
 import React from 'react'
-import Portada from './images/portada.jpg'
+import Portada from './images/portada2.jpg'
 
 const Home = () => {
   return (
@@ -10,3 +10,4 @@ const Home = () => {
 }
 
 export default Home
+

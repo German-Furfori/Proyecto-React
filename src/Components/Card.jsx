@@ -14,7 +14,7 @@ export default function MediaCard(props) {
 
   return (
     <Button>
-      <Link to={'/characters'}>
+      <Link to={'/characters'} style={{ textDecoration: 'none' }}>
         <Card sx={{ maxWidth: 345 }}>
           <CardMedia
             component="img"
@@ -25,13 +25,13 @@ export default function MediaCard(props) {
               {props.name}
             </Typography>
             <Typography>
-                Gender : {props.gender}
+                Gender: {props.gender}
               </Typography>
               <Typography>
-                Status : {props.status}
+                Status: {props.status}
               </Typography>
               <Typography>
-                Species : {props.species}
+                Species: {props.species}
               </Typography>
           </CardContent>
         </Card>

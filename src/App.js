@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ResponsiveAppBar from './components/ResponsiveAppBar';
 import Home from './components/Home';
 import RickAndMortyApp from './components/RickAndMortyApp';
-import Profile from './components/account/Profile';
+import About from './components/account/About';
 import CardInfo from './components/CardInfo';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
@@ -17,7 +17,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home/>} />
             <Route path="/characters" element={<RickAndMortyApp />} />
-            <Route path="/profile" element={<Profile/>} />
+            <Route path="/about" element={<About/>} />
             <Route path="/character/:id" element={<CardInfo/>} />
           </Routes>
         </BrowserRouter>

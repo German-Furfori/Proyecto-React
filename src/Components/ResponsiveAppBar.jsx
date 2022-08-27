@@ -70,17 +70,17 @@ const ResponsiveAppBar = () => {
               }}
             >
               <MenuItem key={'Home'} onClick={handleCloseNavMenu}>
-                <Link to={"/"}>
+                <Link to={"/"} style={{ textDecoration: 'none' }}>
                   <Typography textAlign="center">Home</Typography>
                 </Link>
               </MenuItem>
               <MenuItem key={'Home'} onClick={handleCloseNavMenu}>
-                <Link to={"/characters"}>
+                <Link to={"/characters"} style={{ textDecoration: 'none' }}>
                   <Typography textAlign="center">Characters</Typography>
                 </Link>
               </MenuItem>
               <MenuItem key={'About'} onClick={handleCloseNavMenu}>
-                <Link to={"/"}>
+                <Link to={"/about"} style={{ textDecoration: 'none' }}>
                   <Typography textAlign="center">About</Typography>
                 </Link>
               </MenuItem>
@@ -88,7 +88,7 @@ const ResponsiveAppBar = () => {
           </Box>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-              <Link to={"/"}>
+              <Link to={"/"} style={{ textDecoration: 'none' }}>
                 <Button
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: 'white', display: 'block' }}
@@ -96,7 +96,7 @@ const ResponsiveAppBar = () => {
                   Home
                 </Button>
               </Link>
-              <Link to={"/characters"}>
+              <Link to={"/characters"} style={{ textDecoration: 'none' }}>
                 <Button
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: 'white', display: 'block' }}
@@ -104,7 +104,7 @@ const ResponsiveAppBar = () => {
                   Characters
                 </Button>
               </Link>
-              <Link to={"/profile"}>
+              <Link to={"/about"} style={{ textDecoration: 'none' }}>
                 <Button
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: 'white', display: 'block' }}
