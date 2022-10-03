@@ -6,7 +6,7 @@ import { Pagination, Container } from '@mui/material';
 
 const RickAndMortyApp = () => {
   const dispatch = useDispatch();
-  const {characters = [], page} = useSelector( state => state.characters );
+  const {characters = []} = useSelector( state => state.characters );
 
   const handleChangePage = (event, value) => {
     event.preventDefault();
@@ -14,7 +14,7 @@ const RickAndMortyApp = () => {
   }
 
   useEffect(() => {
-    dispatch( getCharacters() ); // Estoy disparando el thunk
+    dispatch( getCharacters() );
   }, [dispatch])
 
   return (
@@ -26,15 +26,7 @@ const RickAndMortyApp = () => {
           flexDirection: 'column',
           alignItems: 'center',
          }}>
-          <Pagination
-            sx={{
-              marginTop: '2rem',
-            }}
-            count={42}
-            defaultPage={page}
-            onChange={handleChangePage}
-            color="primary" />
-
+    
           <Grid characters = {characters}/>
 
           <Pagination
@@ -42,9 +34,10 @@ const RickAndMortyApp = () => {
               marginTop: '2rem',
             }}
             count={42}
-            defaultPage={page}
+            defaultPage={1}
             onChange={handleChangePage}
             color="primary" />
+            
       </Container>
     </div>
   )

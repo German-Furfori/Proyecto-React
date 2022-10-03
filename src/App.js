@@ -9,7 +9,7 @@ import { Provider } from 'react-redux';
 import { store } from './store/store';
 
 function App() {
-  return ( // https://youtu.be/ZXiJdEWVcqY VIDEO DE RUTAS PRIVADAS
+  return (
     <>
       <Provider store={store}>
         <BrowserRouter>
@@ -27,27 +27,3 @@ function App() {
 }
 
 export default App;
-
-/* 
-
-<Provider store={store} >
-        <AuthContextProvider>
-          <BrowserRouter>
-            <ResponsiveAppBar/>
-            <Routes>
-              <Route path="/" element={<PublicRoute />}>
-                <Route path="/home" element={<Home/>} />
-                <Route path="/login" element={<Login/>} />
-              </Route>
-              <Route path="/app" element={<PrivateRoute/>}>
-                <Route path="/characters" element={<RickAndMortyApp/>} />
-                <Route path="/profile" element={<Profile/>} />
-                <Route path="/logout" element={<Logout/>} />
-                <Route path="/character/:id" element={<CardInfo/>} />
-              </Route>
-            </Routes>
-          </BrowserRouter>
-        </AuthContextProvider>
-      </Provider>
-
-*/

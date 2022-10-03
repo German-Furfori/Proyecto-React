@@ -7,11 +7,8 @@
 // You can also remove this file if you'd prefer not to use a
 // service worker, and the Workbox build step will be skipped.
 
-import { clientsClaim } from 'workbox-core';
-import { ExpirationPlugin } from 'workbox-expiration';
-import { precacheAndRoute, createHandlerBoundToURL } from 'workbox-precaching';
-import { registerRoute } from 'workbox-routing';
-import { StaleWhileRevalidate } from 'workbox-strategies';
+import { clientsClaim } from 'workbox-core'; // Workbox nos soluciona muchas cosas de las estrategias de caché
+import { precacheAndRoute } from 'workbox-precaching';
 
 clientsClaim();
 
@@ -21,52 +18,44 @@ clientsClaim();
 // even if you decide not to use precaching. See https://cra.link/PWA
 precacheAndRoute(self.__WB_MANIFEST);
 
-// Set up App Shell-style routing, so that all navigation requests
-// are fulfilled with your index.html shell. Learn more at
-// https://developers.google.com/web/fundamentals/architecture/app-shell
-const fileExtensionRegexp = new RegExp('/[^/?]+\\.[^/]+$');
-registerRoute(
-  // Return false to exempt requests from being fulfilled by index.html.
-  ({ request, url }) => {
-    // If this isn't a navigation, skip.
-    if (request.mode !== 'navigate') {
-      return false;
-    } // If this is a URL that starts with /_, skip.
+// Borré todo lo de abajo, me quedé con el precache
 
-    if (url.pathname.startsWith('/_')) {
-      return false;
-    } // If this looks like a URL for a resource, because it contains // a file extension, skip.
+const CACHE_STATIC = 'cache-static-v1'; // Agrego un const para manejar esa url desde este const
+const CACHE_DYNAMIC = 'cache-dynamic-v1';
+const CACHE_IMMUTABLE = 'cache-inmutable-v1';
 
-    if (url.pathname.match(fileExtensionRegexp)) {
-      return false;
-    } // Return true to signal that we want to use the handler.
+const APP_SHELL = [ // Pongo el iconito de react, el que aparece en la pestaña, y el index y todo lo que está en public que quiero guardar
+  '/',
+  '/index.html',
+  '/favicon.ico'
+];
 
-    return true;
-  },
-  createHandlerBoundToURL(process.env.PUBLIC_URL + '/index.html')
-);
+const APP_SHELL_IMMUTABLE = []; // Juani puso la fuente Roboto acá, el link de fonts.googleapis.com
 
-// An example runtime caching route for requests that aren't handled by the
-// precache, in this case same-origin .png requests like those from in public/
-registerRoute(
-  // Add in any other file extensions or routing criteria as needed.
-  ({ url }) => url.origin === self.location.origin && url.pathname.endsWith('.png'), // Customize this strategy as needed, e.g., by changing to CacheFirst.
-  new StaleWhileRevalidate({
-    cacheName: 'images',
-    plugins: [
-      // Ensure that once this runtime cache reaches a maximum size the
-      // least-recently used images are removed.
-      new ExpirationPlugin({ maxEntries: 50 }),
-    ],
-  })
-);
+self.addEventListener('install', event => {
+  const promise1 = caches.open(CACHE_STATIC) // Va a tratar de abrir la cache static definida más arriba
+    .then(cache => {
+      cache.addAll(APP_SHELL); // Incorpora todo dentro de un array, en este caso APP_SHELL
+    });
+  
+  const promise2 = caches.open(CACHE_IMMUTABLE) // Lo mismo pero con la inmutable
+    .then(cache => {
+      cache.addAll(APP_SHELL_IMMUTABLE);
+    });
 
-// This allows the web app to trigger skipWaiting via
-// registration.waiting.postMessage({type: 'SKIP_WAITING'})
-self.addEventListener('message', (event) => {
-  if (event.data && event.data.type === 'SKIP_WAITING') {
-    self.skipWaiting();
-  }
+  event.waitUntil(Promise.all([promise1, promise2])); // Promise.all espera un array de promesas, y las espera todas
 });
 
-// Any other custom service worker logic can go here.
+self.addEventListener('activate', event => {
+  const response = caches.keys() // Trae todos los nombres de las cache que tenga almacenada la api cache
+    .then(keys => {
+      keys.forEach(key => { // Recorremos las keys (nombres de las caches)
+        if(key != CACHE_STATIC && key.includes('static')) { // Vemos si el nombre es distinto al de static, y también que incluya en su nombre el string 'static'
+          // Si entro acá, el nombre es distinto y contiene el static en su nombre
+          return caches.delete(key); // Limpia la caché. Returna true o false, dependiendo si la pudo borrar o no. No nos importa por ahora lo que devuelva
+        }
+      });
+    });
+
+  event.waitUntil(response); // Banca hasta que termine la promesa del response
+});

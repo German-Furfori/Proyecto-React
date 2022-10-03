@@ -25,14 +25,14 @@ export default function MediaCard(props) {
               {props.name}
             </Typography>
             <Typography>
-                Gender: {props.gender}
-              </Typography>
-              <Typography>
-                Status: {props.status}
-              </Typography>
-              <Typography>
-                Species: {props.species}
-              </Typography>
+              Gender: {props.gender}
+            </Typography>
+            <Typography>
+              Status: {props.status}
+            </Typography>
+            <Typography>
+              Species: {props.species}
+            </Typography>
           </CardContent>
         </Card>
       </Link>

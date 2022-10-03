@@ -13,8 +13,8 @@ export const charactersSlice = createSlice({
         },
         setCharacters: (state, action) => {
             state.isLoading = false;
-            state.page = action.payload.page; // Ésta la página en la que estoy
-            state.characters = action.payload.characters; // Este sería como el arreglo de los personajes
+            state.page = action.payload.page;
+            state.characters = action.payload.characters;
         },
         setCharactersInfo: (state, action) => {
             state.isLoading = false;
